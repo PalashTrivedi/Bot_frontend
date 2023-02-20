@@ -1,0 +1,91 @@
+<div class="register-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 ml-auto mr-auto">
+                <div class="card card-signup">
+                    <h2 class="card-title text-center">Register</h2>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-5 ml-auto">
+                                <div class="info info-horizontal">
+                                    <div class="icon icon-rose"><i class="material-icons">timeline</i></div>
+                                    <div class="description">
+                                        <h4 class="info-title">Marketing</h4>
+                                        <p class="description"> We've created the marketing campaign of the website. It was a very interesting collaboration. </p>
+                                    </div>
+                                </div>
+                                <div class="info info-horizontal">
+                                    <div class="icon icon-primary"><i class="material-icons">code</i></div>
+                                    <div class="description">
+                                        <h4 class="info-title">Fully Coded in HTML5</h4>
+                                        <p class="description"> We've developed the website with HTML5 and CSS3. The client has access to the code using GitHub. </p>
+                                    </div>
+                                </div>
+                                <div class="info info-horizontal">
+                                    <div class="icon icon-info"><i class="material-icons">group</i></div>
+                                    <div class="description">
+                                        <h4 class="info-title">Built Audience</h4>
+                                        <p class="description"> There is also a Fully Customizable CMS Admin Dashboard for this product. </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 mr-auto">
+                                <div class="social text-center">
+                                    <button mat-raised-button="" class="btn btn-just-icon btn-round btn-twitter mat-raised-button mat-button-base">
+                                        <span class="mat-button-wrapper"><i class="fa fa-twitter"></i></span>
+                                        <div matripple="" class="mat-ripple mat-button-ripple"></div>
+                                        <div class="mat-button-focus-overlay"></div>
+                                    </button>
+                                    <button mat-raised-button="" class="btn btn-just-icon btn-round btn-dribbble mat-raised-button mat-button-base">
+                                        <span class="mat-button-wrapper"><i class="fa fa-google"></i></span>
+                                        <div matripple="" class="mat-ripple mat-button-ripple"></div>
+                                        <div class="mat-button-focus-overlay"></div>
+                                    </button>
+                                    <button mat-raised-button="" class="btn btn-just-icon btn-round btn-facebook mat-raised-button mat-button-base">
+                                        <span class="mat-button-wrapper"><i class="fa fa-facebook"></i></span>
+                                        <div matripple="" class="mat-ripple mat-button-ripple"></div>
+                                        <div class="mat-button-focus-overlay"></div>
+                                    </button>
+                                    <h4 class="mt-3"> or be classical </h4>
+                                </div>
+                                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form ng-untouched ng-pristine ng-valid">
+                                    <div class="form-group has-default">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend"><span class="input-group-text"><i class="material-icons">face</i></span></div>
+                                            <input type="text" name="first_name" id="first_name" formControlName="first_name" placeholder="First Name" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-default">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend"><span class="input-group-text"><i class="material-icons">face</i></span></div>
+                                            <input type="text" name="last_name" id="last_name" formControlName="last_name" placeholder="Last Name" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-default">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend"><span class="input-group-text"><i class="material-icons">mail</i></span></div>
+                                            <input type="text" name="email" id="email" formControlName="email" placeholder="Email" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-default">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend"><span class="input-group-text"><i class="material-icons">lock_outline</i></span></div>
+                                            <input type="password" name="password" id="password" formControlName="password" placeholder="Password" class="form-control">
+                                        </div>
+                                    </div>
+                                    <mat-checkbox class="mat-checkbox form-check mat-accent" id="mat-checkbox-2" formControlName="terms">
+                                        <span class="mat-checkbox-label"><span style="display: none;">&nbsp;</span> I agree to the <a href="javascript:void(0);">terms and conditions</a>. </span>
+                                    </mat-checkbox>
+                                    <div class="text-center"><a href="javascript:void(0);" (click)="onSubmit();" class="btn btn-primary btn-round mt-4">Register</a></div>
+                                </form>
+                                <div class="d-flex justify-content-center">
+                                    <span><span style="display: none;">&nbsp;</span>Already have an account? <a href="/login" routerLink="/login">Login</a>. </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
