@@ -1,0 +1,1119 @@
+<html>    
+
+<head>
+    <script src="assets/js/sentry.min.js"></script>
+    <script>
+        if(window.location.hostname == "davv.pihu.ai"){
+            environment_sentry="production";
+            console.log("sentry_env", environment_sentry);
+            Sentry.init({ dsn: 'https://0c31c14b49f74a7f92103e2b799b98ca@o434230.ingest.sentry.io/5392706',
+            environment: environment_sentry});
+        }
+    </script>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
+    <!--
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap-material-design.min.css" />
+    -->
+        
+    <link rel="stylesheet" href="assets/css/style.css" />
+   
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="./dist/bundle-vendor.2a46c1b0b760fff9198a.css" />
+    <!-- <link rel="stylesheet" href="./dist/bundle-app.2a46c1b0b760fff9198a.css" /> -->
+    <!-- 
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap-material-design.min.js"></script>
+    <script src="assets/js/recorder.js"></script>
+    <script src="assets/js/fetch.min.js"></script>
+    <script src="assets/js/bluebird.min.js"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+    <script src="assets/js/ie11CustomProperties.min.js"></script>
+    <script src="assets/js/sentry.min.js"></script>
+    -->
+    <script src="./assets/js/recorder.js"></script>
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/tether.min.js"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+    <script src="./assets/js/fetch.min.js"></script>
+    <script src="./assets/js/ie11CustomProperties.min.js"></script>
+    <script src="./assets/js/jquery.min.js"></script>
+    <script src="./assets/js/mustache.min.js"></script>
+    <script src="./dist/bundle-vendor.b76cacdd9362aafe1b2f.js"></script>
+    <script src="./assets/js/script-6.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+
+<body>
+    <div id="body">
+        <div id="chat-circle-container">
+            <div>
+                <img class="chat-circle-image" src="./assets/images/devi.png">
+            </div>
+            <div id="chat-circle">
+                <div id="chat-overlay"></div>
+                <i class="material-icons" id="textsms-icon">question_answer</i>
+                <span id="chat-with-text"></span>
+            </div>
+        </div>
+        <div class="chat-box">
+            <div class="chat-box-header">
+                <div class="ribbon ribbon-top-left"><span>Beta</span></div>
+                <span id="chat_icon"></span>
+                <span class="chat-box-toggle" id="chat-box-minimize" title="Minimize Chat"><i
+                        class="material-icons">minimized</i></span>
+                <span class="chat-box-toggle" id="chat-box-delete" title="Reset Chat"><i
+                        class="material-icons">cached</i></span>
+                <span class="chat-box-toggle" id="chat-box-mail" title="E-Mail Chat History">
+                    <i class="material-icons">save_alt</i>
+                </span>
+                <!-- <span class="chat-box-toggle" id="chat-box-appointment" title="Schedule Your Appointment" style="position: fixed;">
+                    <i class="material-icons">calender_today</i>
+                </span> -->
+                <b><span id="bot_name"></span></b>
+                <!-- <span id="built_by"></span> -->       
+            </div>
+            <div class="cookies_banner" id="cookies_banner_div" hidden="true">
+                <span>Your 3rd party cookies are blocked. Please unblock and refresh for better experience.
+                    <a href="https://offcampushousing.uconn.edu/auth/help-cookies" target="_blank">Details</a>
+                </span>
+            </div>
+            <div class="chat-box-body">
+                <div class="chat-box-overlay"></div>
+                <div class="chat-logs"></div>
+            </div>
+            <!-- <div>
+            <span id="powered_by">
+            </span>
+         </div> -->
+            <div class="chat-input">
+                <svg preserveAspectRatio="none" id="visualizer" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <defs>
+                        <mask id="mask">
+                            <g id="maskGroup"></g>
+                        </mask>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color: #ff0a0a; stop-opacity: 1" />
+                            <stop offset="20%" style="stop-color: #f1ff0a; stop-opacity: 1" />
+                            <stop offset="90%" style="stop-color: #d923b9; stop-opacity: 1" />
+                            <stop offset="100%" style="stop-color: #050d61; stop-opacity: 1" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width="100%" height="100%" fill="url(#gradient)" mask="url(#mask)"></rect>
+                </svg>
+                <h1 id="visualizer_h1"></h1>
+
+                <audio id="response_audio_id" controls style="display: none;">
+                    <source id="response_audio_source_id" src="" type="audio/mp3">
+                </audio>
+                <form id="chat_input_form">
+                    <input type="text" id="chat-input" placeholder="Send a message..." autocomplete="off" />
+                    <button type="submit" class="chat-submit" id="chat-submit" title="send"><i
+                            class="material-icons">send</i></button>
+                    <button type="button" class="record" id="recordButton" title="search by voice" onclick="window.__bot.startRecording();"><i class="material-icons">mic</i></button>
+                </form>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <span id="powered_by">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="mailHistoryModal" tabindex="-1" role="dialog" aria-labelledby="mailHistoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mailHistoryModalLabel">Please Provide Email</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body-id">
+                    <form id="mail_history_form">
+                        <div class="form-group">
+                            <label for="email" class="bmd-label-floating">Email-Address</label>
+                            <input type="email" class="form-control" name="email" id="mail_history_form_email" required> 
+                            <div class="invalid-feedback" id="error_message_mail_history_email"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="bmd-label-floating">We will be sending your chat history on this email-address.</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn " id="mail_history_form_submit_button">Send</button>
+                    <button type="button" class="btn " data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="appointmentModal" tabindex="-1" role="dialog" aria-labelledby="appointmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="appointmentModalLabel">Schedule Your Appointment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body-id">
+                    <form id="appointment_form">
+                        <div class="form-group">
+                            <label for="name" class="bmd-label-floating">Name</label>
+                            <input type="text" class="form-control" name="name" id="appointment_form_name" required> 
+                            <div class="invalid-feedback" id="error_message_appointment_form_name">Please enter your name.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="bmd-label-floating">Email-Address</label>
+                            <input type="email" class="form-control" name="email" id="appointment_form_email" required> 
+                            <div class="invalid-feedback" id="error_message_appointment_form_email">Please enter a valid email.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="day" class="bmd-label-floating">Appointment Date</label>
+                            <input type="text" class="form-control" name="day" id="appointment_form_day" required> 
+                            <div class="invalid-feedback" id="error_message_appointment_form_day">Please select appointment date.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="day" class="bmd-label-floating">Select Time Slot - IST (UTC+5:30hrs)</label>
+                            <select class="form-control" name="time_slot" id="appointment_form_time_slot" required disabled></select>
+                            <!-- <div class="invalid-feedback" id="error_message_appointment_form_time_slot">Please select appointment time.</div> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="user" class="bmd-label-floating">Select Concerned Person</label>
+                            <select class="form-control" name="user" id="appointment_form_user" required disabled></select>
+                            <!-- <div class="invalid-feedback" id="error_message_appointment_form_user"></div> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="subject" class="bmd-label-floating">Reason of Appointment</label>
+                            <input type="text" class="form-control" name="subject" id="appointment_form_subject" required> 
+                            <div class="invalid-feedback" id="error_message_appointment_form_subject">Please enter topic for appointment.</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn " id="appointment_form_submit_button">Send</button>
+                    <button type="button" class="btn " data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="responseModal" tabindex="-1" role="dialog" aria-labelledby="responseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="responseModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body-id" style="text-align: center;">
+                    <p id="response_modal_message"></p>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="refreshChatConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="refreshChatConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="refreshChatConfirmationModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body-id" style="text-align: center;">
+                    <p>Your chat will be deleted. Do you want to reset your Chat?</p>
+                    <button type="button" class="btn btn-primary" id="button_modal_refresh_chat_confirmation_yes">YES</button>
+                    <button type="button" class="btn btn-secondary" id="button_modal_refresh_chat_confirmation_no" data-dismiss="modal">NO</button>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .container_calendar {
+            background: #c2e0e0;
+            width: 351px;
+            height: 330px;
+            border-radius: 20px;
+            position: relative;
+            border: 1px solid;
+            border-color: white;
+        }
+        .container_calendar table {
+            border-collapse: inherit;
+            display: inline-table;
+            position: absolute;
+            top: 5px;
+            left: 80px;
+            border-spacing: 7px 7px;
+        }
+        .container_calendar #calendar_tr_days  {
+            text-align: center;
+            font-size: 20px;
+            color: black;
+        }
+        .container_calendar table td {
+            text-align: center;
+            color: darkslateblue;
+            font-weight: bold;
+        }
+        .container_calendar table .calendar_timeslot {
+            cursor: pointer;
+            border: 1px solid;
+            width: 175px;
+            height: 32px;
+            border-color: #009eff;
+            border-radius: 5px;
+        }
+        .container_calendar table .calendar_timeslot_active {
+            background-color: #009eff;
+        }
+        .container_calendar table .calendar_timeslot:hover {
+            background-color: #009eff;
+            color: white;
+        }
+        .container_calendar table .calendar_timeslot:active {
+            background: #222335;
+        }
+        .container_calendar .calendar_icon_arrow {
+            cursor: pointer;
+            background: #3195d2;
+            border-radius: 12px;
+            color: white;
+        }
+        .container_calendar .calendar_icon_arrow:active {
+            background: #222335;
+        }
+        .container_calendar .calendar_icon_arrow_left {
+            position: absolute;
+            top: 167px;
+            left: 35px;
+        }
+        .container_calendar .calendar_icon_arrow_right {
+            position: absolute;
+            top: 167px;
+            right: 35px;
+        }
+        .container_calendar .calendar_ist_discliamer {
+            position: absolute;
+            bottom: 5px;
+            right: 15px;
+        }
+    </style>
+    <style>
+        #button_scholarship_upload_form_form_file {
+            position: absolute;
+            left: 15px;
+            top: 90px;
+            background: grey;
+            height: 40px;
+            width: 133px;
+            border-radius: 25px;
+        }
+        @-moz-document url-prefix() {
+            #button_scholarship_upload_form_form_file {
+                position: absolute;
+                left: 15px;
+                top: 91px;
+                background: grey;
+                height: 41px;
+                width: 145px;
+                border-radius: 25px;
+            }
+        }
+    </style>
+    <script id="template_form_container" type="x-tmpl-mustache">
+        <span id="text_input">
+            {{{ form }}}
+        </span>
+     </script>
+    <script id="template_form" type="x-tmpl-mustache">
+        <form class="chat_form" id="{{ name }}">
+            {{{ fields }}}
+            <div class="invalid-feedback text-center d-block" id="error_message_{{ name }}_server"></div>
+            <button type="button" class="btn chat_form_button" onclick="window.__bot.chat_form_action('{{ name }}', 'submit')">Send</button>
+            <button type="button" class="btn chat_form_button" onclick="window.__bot.chat_form_action('{{ name }}', 'cancel')">Cancel</button>
+        </form>
+     </script>
+     <script id="template_form_field_text" type="x-tmpl-mustache">
+        <div class="form-group">
+            <label for="{{ field.name }}" class="bmd-label-floating" style="font-size: 15 !important;">{{ field.display_name }}</label>
+            <input type="text" class="form-control" name="{{ field.name }}" {{ field.required }}>
+            <div class="invalid-feedback" id="error_message_{{ form_name }}_{{ field.name }}"></div>
+        </div>
+     </script>
+     <script id="template_form_field_email" type="x-tmpl-mustache">
+        <div class="form-group">
+            <label for="{{ field.name }}" class="bmd-label-floating" style="font-size: 15 !important;">{{ field.display_name }}</label>
+            <input type="email" class="form-control" name="{{ field.name }}" {{ field.required }}>
+            <div class="invalid-feedback" id="error_message_{{ form_name }}_{{ field.name }}"></div>
+        </div>
+     </script>
+     <script id="template_form_field_textarea" type="x-tmpl-mustache">
+        <div class="form-group">
+            <label for="{{ field.name }}" class="bmd-label-floating" style="font-size: 15 !important;">{{ field.display_name }}</label>
+            <textarea rows="{{ field.rows }}" class="form-control" name="{{ field.name }}" {{ field.required }}></textarea>
+        </div>
+     </script>
+     <script id="template_form_field_password" type="x-tmpl-mustache">
+        <div class="form-group">
+            <label for="{{ field.name }}" class="bmd-label-floating" style="font-size: 15 !important;">{{ field.display_name }}</label>
+            <input type="text" class="form-control field_password" name="{{ field.name }}" {{ field.required }} autocomplete="off">
+            <div class="invalid-feedback" id="error_message_{{ form_name }}_{{ field.name }}"></div>
+        </div>
+     </script>
+     <script id="template_form_field_select" type="x-tmpl-mustache">
+        <div class="form-group">
+            <label for="{{ field.name }}" class="bmd-label-floating" style="font-size: 15 !important;">{{ field.display_name }}</label>
+            <select class="form-control" name="{{ field.name }}" {{ field.required }}>
+                {{{ options }}}
+            </select>
+        </div>
+     </script>
+     <script id="template_form_field_select_option" type="x-tmpl-mustache">
+        <option value="{{ option.value }}">{{ option.display_value }}</option>
+     </script>
+     <script id="template_form_field_file_pdf" type="x-tmpl-mustache">
+        <div class="form-group">
+            <button class="btn" id="button_{{ form_name }}_form_file" onclick="window.__bot.chat_form_upload_form_file()" type="button">Choose File</button>
+            <input type="file" class="form-control" name="{{ field.name }}" id="{{ form_name }}_form_file" accept="application/pdf" {{ field.required }} style="float: right;width: 320px;">
+            <div class="invalid-feedback" id="error_message_{{ form_name }}_{{ field.name }}" style="float: right;"></div>
+        </div>
+        <br>
+        <br>
+     </script>
+     <script id="template_form_field_calendar_container" type="x-tmpl-mustache">
+        <div class="container_calendar">
+        </div>
+     </script>
+     <script id="template_form_field_calendar" type="x-tmpl-mustache">
+        {{#left}}
+        <span class="material-icons calendar_icon_arrow calendar_icon_arrow_left" onclick="window.__bot.calendar_generate('left')">keyboard_arrow_left</span>
+        {{/left}}
+        <table>
+            <thead>
+                <tr id="calendar_tr_days">
+                    <th>{{ day }}</th>
+                </tr>
+            </thead>
+            <tbody id="calender_tbody">
+                <tr>
+                    <td>
+                        {{#up}}
+                        <span class="material-icons calendar_icon_arrow" onclick="window.__bot.calendar_generate('up')">keyboard_arrow_up</span>
+                        {{/up}}
+                        {{^up}}
+                        <span class="material-icons calendar_icon_arrow" onclick="window.__bot.calendar_generate('up')" style="visibility: hidden;">keyboard_arrow_up</span>
+                        {{/up}}
+                    </td>
+                </tr>
+                {{#time_slots}}
+                <tr>
+                    <td class="calendar_timeslot" onclick="window.__bot.calendar_select_time_slot(this)">{{ . }}</td>
+                </tr>
+                {{/time_slots}}
+                <tr>
+                    <td>
+                        {{#down}}
+                        <span class="material-icons calendar_icon_arrow" onclick="window.__bot.calendar_generate('down')">keyboard_arrow_down</span>
+                        {{/down}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        {{#right}}
+        <span class="material-icons calendar_icon_arrow calendar_icon_arrow_right" onclick="window.__bot.calendar_generate('right')">keyboard_arrow_right</span>
+        {{/right}}
+        <span class="calendar_ist_discliamer">IST +5:30</span>
+     </script>
+
+    <script id="template_text" type="x-tmpl-mustache">
+       <span id="text_input"> {{{text}}}<br/> </span>
+    </script>
+    <script id="template_quick_reply_replies" type="x-tmpl-mustache">
+        <span id="quick_replies" class="quick_replies_class" onclick="window.__bot.process_input('{{reply_slug}}','{{reply_display_text}}')">
+        {{reply_display_text}}
+        <br/>
+        </span>
+    </script>
+    <script id="template_quick_reply" type="x-tmpl-mustache">
+        <br/>
+        <div style="line-height: 40px;" class="replies_container_div">
+            {{{rendered_replies}}}
+        </div>
+    </script>
+    <script id="template_links" type="x-tmpl-mustache">
+        <br/>
+        <a href="{{link.url}}" target="_blank"style="color: var(--main-bg-color);font-style: italic;">{{link.display_text}}</a>
+    </script>
+    <script id="template_chat" type="x-tmpl-mustache">
+        <div id="cm-msg-{{INDEX}}" class="chat-msg {{type}}">
+            <span class="msg-avatar">
+                {{{profile_image}}}
+            </span>
+            <div class="cm-msg-text">
+                {{{msg}}}
+            </div>
+        </div>
+    </script>
+    <script id="template_form_body" type="x-tmpl-mustache">
+        {{#input_field}}
+        <div class="form-group">
+            <label for="{{fields.name}}" class="bmd-label-floating"> {{fields.displayName}}</label>
+            <input type="{{fields.input_type}}" class="form-control" name="{{fields.name}}" {{fields.required}} >
+            <div class="invalid-feedback" id="error_message_{{fields.name}}"></div>
+        </div>
+        {{/input_field}}
+        {{#textarea_field}}
+        <div class="form-group">
+            <label for="{{fields.name}}" class="bmd-label-floating"> {{fields.displayName}}</label>
+            <textarea rows="{{fields.rows}}" class="form-control" name="{{fields.name}}" {{fields.required}} ></textarea>
+        </div>
+    {{/textarea_field}}
+    </script>
+    <script id="template_typing" type="x-tmpl-mustache">
+        <div class="loading"><br/>Typing</div>
+    </script>
+    <script id="voice_recognizing" type="x-tmpl-mustache">
+        <div class="loading"><br/>Recognizing</div>
+    </script>
+    <script id="template_bot_icon" type="x-tmpl-mustache">
+        <img src="{{bot_icon}}" style="width:55px;height:55px;margin-top:-18px;">
+    </script>
+    <script id="template_powered_by" type="x-tmpl-mustache">
+        Powered by <a id="powered_by_link" {{#brand_href}}href="{{brand_href}}"{{/brand_href}} target="_blank">{{brand_display_name}}</a>
+    </script>
+    <script>
+        $(document).ready(function () {
+            // server code
+
+            window.__bot = chatbot();
+            window.__bot.calendar_generate = function(action){
+                var day = window.__bot.calendar_days[window.__bot.calendar_counter_day];
+                var right = (window.__bot.calendar_counter_day < window.__bot.calendar_days.length-1);
+                var left = (window.__bot.calendar_counter_day > 0);
+                var down = (window.__bot.calendar_counter_time_slot < day.time_slots.length-6);
+                var up = (window.__bot.calendar_counter_time_slot > 0);
+                if( (action == "right") && right ){
+                    window.__bot.calendar_counter_day +=1;
+                }
+                if( (action == "left") && left ){
+                    window.__bot.calendar_counter_day -=1;
+                }
+                if( (action == "down") && down ){
+                    window.__bot.calendar_counter_time_slot +=1;
+                }
+                if( (action == "up") && up ){
+                    window.__bot.calendar_counter_time_slot -=1;
+                }
+                var day = window.__bot.calendar_days[window.__bot.calendar_counter_day];
+                var right = (window.__bot.calendar_counter_day < window.__bot.calendar_days.length-1);
+                var left = (window.__bot.calendar_counter_day > 0);
+                var down = (window.__bot.calendar_counter_time_slot < day.time_slots.length-6);
+                var up = (window.__bot.calendar_counter_time_slot > 0);
+                var template_form_field_calendar = document.getElementById("template_form_field_calendar").innerHTML;
+                var rendered_template_form_field_calendar = Mustache.render(template_form_field_calendar, {
+                    "day": day.date,
+                    "time_slots": day.time_slots.slice(window.__bot.calendar_counter_time_slot, window.__bot.calendar_counter_time_slot+6),
+                    "right": right,
+                    "left": left,
+                    "down": down,
+                    "up": up,
+                });
+                document.getElementsByClassName("container_calendar")[0].innerHTML = rendered_template_form_field_calendar;
+            }
+            window.__bot.calendar_select_time_slot = function(element){
+                console.log(element);
+                $(".calendar_timeslot_active").removeClass("calendar_timeslot_active");
+                element.classList.add("calendar_timeslot_active");
+            }
+
+            window.__bot.INDEX = 0;
+            $("#chat-submit").click(function (e) {
+                console.log("message submitted");
+                e.preventDefault();
+                var msg = $("#chat-input").val();
+                if (msg.trim() == "" || window.__bot.awaiting_response) {
+                    return false;
+                }
+                window.__bot.process_input(msg, undefined);
+            });
+
+            $(document).delegate(".chat-btn", "click", function () {
+                var value = $(this).attr("chat-value");
+                var name = $(this).html();
+                $("#chat-input").attr("disabled", false);
+                window.__bot.generate_message(name, "self");
+            });
+
+            $("#chat-circle").click(function () {
+                $("#chat-circle").addClass("disabled_element");
+                if (window.__bot.host_parent) {
+                    try {
+                        window.parent.postMessage("maximized", window.__bot.host_parent);
+                    } catch (error) {
+                        console.log("Error whole maximized postmessage");
+                    }
+                }
+                if ($(".chat-logs")[0].children.length == 0) {
+                    window.__bot.service_init_main()
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (data) {
+                            console.log(data);
+                            window.__bot.session_uid = data.session_uid;
+                            console.log("set = ", window.__bot.session_uid)
+                            window.__bot.lStorage.setItem("__bot_session_uid_" + window.__bot
+                                .web_uid,
+                                window.__bot.session_uid);
+                            window.__bot.process_messages(data.messages, true, 0);
+                            window.__bot.toggle_chatui();
+                            $("#chat-circle").removeClass("disabled_element");
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                            $("#chat-circle").removeClass("disabled_element");
+                            window.__bot.toggle_chatui();
+                        });
+                } else {
+                    window.__bot.toggle_chatui();
+                    $("#chat-circle").removeClass("disabled_element");
+                }
+            });
+
+            $("#chat-box-minimize").click(function () {
+                if (window.__bot.host_parent) {
+                    setTimeout(function () {
+                        try {
+                            window.parent.postMessage("minimized", window.__bot.host_parent);
+                        } catch (error) {
+                            console.log("Error whole minimized postmessage");
+                        }
+                    }, 500);
+                }
+                window.__bot.stop_blob_data();
+                window.__bot.toggle_chatui();
+            });
+
+            $("#chat-box-delete").click(function () {
+                $("#refreshChatConfirmationModal").modal('show');
+            });
+
+            $("#button_modal_refresh_chat_confirmation_yes").click(function(){
+                window.__bot.disable_reset_chat();
+                window.__bot.stop_blob_data();
+                // window.__bot.disable_quick_replies();
+                window.__bot.awaiting_response = true;
+                window.__bot.service_delete_history()
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        console.log(data);
+                        window.__bot.service_init_main()
+                            .then(function (response) {
+                                return response.json();
+                            })
+                            .then(function (data) {
+                                console.log(data);
+                                document.getElementsByClassName("chat-logs")[0].innerHTML = "";
+                                window.__bot.process_messages(data.messages, false, 0);
+                                window.__bot.enable_reset_chat();
+                                window.__bot.enable_text_input();
+                                window.__bot.awaiting_response = false;
+                                $("#refreshChatConfirmationModal").modal('hide');
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                                window.__bot.enable_reset_chat();
+                                window.__bot.enable_text_input();
+                                window.__bot.awaiting_response = false;
+                                $("#refreshChatConfirmationModal").modal('hide');
+                            });
+                    });
+            });
+
+            $("#chat-box-mail").click(function () {
+                window.__bot.mail_history_form_reset();
+                $("#mailHistoryModal").modal("show");
+            });
+            $("#chat-box-appointment").click(function () {
+                window.__bot.ws_send("calendar", "");
+                return;
+                var data = {};
+                data.session_uid = window.__bot.session_uid;
+                data.web_uid = window.__bot.web_uid;
+                console.log(data);
+                window.__bot.service_appointment_new(data).then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log(data);
+                    window.__bot.calender_availability = data.data.microsoft_calender_integration.dates;
+                    window.__bot.appointment_form_users = data.data.microsoft_calender_integration.users;
+                    window.__bot.appointment_form_reset();
+                    $("#appointmentModal").modal("show");
+                });
+            });
+
+            window.__bot.mail_history_form_reset = function () {
+                $("#mail_history_form_email").removeClass("is-invalid");
+                $("#mail_history_form_submit_button").attr("disabled", false);
+                document.getElementById("mail_history_form").reset();
+            };
+
+            window.__bot.appointment_form_reset = function () {
+                $("#appointment_form_day").removeClass("is-invalid");
+                $("#appointment_form_subject").removeClass("is-invalid");
+                $("#appointment_form_name").removeClass("is-invalid");
+                $("#appointment_form_email").removeClass("is-invalid");
+                $("#appointment_form_submit_button").attr("disabled", false);
+                if(window.__bot.appointment_form_day_datepicker){
+                    window.__bot.appointment_form_day_datepicker.clear();
+                }
+                document.getElementById('appointment_form_time_slot').disabled = true;
+                document.getElementById("appointment_form_time_slot").innerHTML = "<option>Please select date first</option>";
+                // window.__bot.calender_availability = [
+                //     {
+                //         "date": "2020-09-16",
+                //         "time_slots": [
+                //             "09:00-10:00",
+                //             "10:00-11:00",
+                //             "11:00-12:00",
+                //             "12:00-13:00",
+                //         ]
+                //     },
+                //     {
+                //         "date": "2020-09-17",
+                //         "time_slots": [
+                //             "10:00-11:00",
+                //             "14:00-15:00",
+                //         ]
+                //     },
+                //     {
+                //         "date": "2020-09-19",
+                //         "time_slots": [
+                //             "13:00-14:00",
+                //             "14:00-15:00",
+                //         ]
+                //     }
+                // ];
+                window.__bot.appointment_form_day_datepicker = flatpickr("#appointment_form_day", {
+                    enable: window.__bot.calender_availability.map(function(x){return x.date}),
+                    onChange: function(){
+                        if(!document.getElementById('appointment_form_day').value){
+                            return;
+                        }
+                        console.log("date changed");
+                        document.getElementById("appointment_form_time_slot").innerHTML=window.__bot.calender_availability.filter(function(x){
+                            return (x.date == document.getElementById('appointment_form_day').value);
+                        })[0].time_slots.map(function(x){
+                            return '<option value="'+x+'">'+x+'</option>';
+                        }).join('');
+                        document.getElementById('appointment_form_time_slot').disabled = false;
+                    }
+                });
+                document.getElementById("appointment_form").reset();
+                document.getElementById("appointment_form_user").innerHTML=window.__bot.appointment_form_users.map(function(x){
+                    return '<option value="'+x.name+'">'+x.name+'</option>';
+                }).join('');
+                document.getElementById('appointment_form_user').disabled = false;
+            };
+
+            window.__bot.chat_form_upload_form_file = function(){
+                $("#scholarship_upload_form_form_file").trigger('click');
+            }
+
+            window.__bot.chat_form_hide = function(element_form_jquery){
+                if(element_form_jquery){
+                    element_form_jquery.closest('.chat-msg').remove();
+                }else{
+                    $(".chat_form").closest('.chat-msg').remove();
+                }
+            }
+
+            window.__bot.chat_form_action = function (form_name, action) {
+                var element_form = document.getElementById(form_name);
+                var element_form_jquery = $("#"+form_name);
+                if(element_form){
+                    document.getElementById("error_message_" + form_name + "_server").innerHTML = "";
+                    if(action == "cancel"){
+                        window.__bot.chat_form_hide(element_form_jquery);
+                        return;
+                    }else if(action == "submit"){
+                        for (var i = 0; i < element_form.elements.length; i++) {
+                            var element = element_form.elements[i];
+                            console.log(element);
+                            if (element.name=="form_file"){
+                                var file = element.files[0];
+                                if(!file || file.type != "application/pdf"){
+                                    document.getElementById("error_message_" + form_name + "_" + element.name).innerHTML = "Please upload a valid PDF Form.";
+                                    document.getElementById(form_name + "_" + element.name).classList.add("is-invalid");
+                                    return;
+                                }else{
+                                    document.getElementById("error_message_" + form_name + "_" + element.name).innerHTML = "";
+                                    document.getElementById(form_name + "_" + element.name).classList.remove("is-invalid");
+                                }
+                            } else if (element.required && !element.value.trim()) {
+                                document.getElementById("error_message_" + form_name + "_" + element.name).innerHTML =
+                                    "Please enter " + element.previousElementSibling.innerHTML.trim() + ".";
+                                element.classList.add("is-invalid");
+                            } else if (element.type == "email" && !element.checkValidity()) {
+                                document.getElementById("error_message_" + form_name + "_" + element.name).innerHTML =
+                                    "Please enter a valid " + element.previousElementSibling.innerHTML.trim() + ".";
+                                element.classList.add("is-invalid");
+                            } else {
+                                element.classList.remove("is-invalid");
+                            }
+                        }
+                        if(!element_form.checkValidity()){
+                            return;
+                        }
+                    }
+                    if(form_name == "calendar_form"){
+                        if(!document.getElementsByClassName("calendar_timeslot_active")[0]){
+                            document.getElementById("error_message_" + form_name + "_server").innerHTML = "Please select a Time Slot.";
+                            return;
+                        }
+                    }
+                }
+                var form_data = {};
+                if(form_name == "auth_form" && !element_form){
+                    form_data["email"] = window.__bot.auth_form_email;
+                    form_data["password"] = window.__bot.auth_form_password;
+                }else{
+                    $(".chat_form_button").attr("disabled", true);
+                    element_form_jquery.serializeArray().map(function (x) {
+                        form_data[x.name] = x.value;
+                    });
+                    if(form_name == "auth_form"){
+                        window.__bot.auth_form_email = form_data.email;
+                        window.__bot.auth_form_password = form_data.password;
+                    }
+                }
+                if(form_name == "calendar_form"){
+                    var time_slot_string = document.getElementsByClassName("calendar_timeslot_active")[0].innerHTML.trim();
+                    var date_string = window.__bot.calendar_days[window.__bot.calendar_counter_day].date_slug;
+                    var d =new Date("1/1/2013 " + time_slot_string.split("-")[0]);
+                    var start_time = ("0" + d.getHours()).slice(-2)+":"+("0" + d.getMinutes()).slice(-2);
+                    var d =new Date("1/1/2013 " + time_slot_string.split("-")[1]);
+                    var end_time = ("0" + d.getHours()).slice(-2)+":"+("0" + d.getMinutes()).slice(-2);
+                    form_data.start_time = date_string + "T" + start_time +":00.0000000";
+                    form_data.end_time = date_string + "T" + end_time +":00.0000000";
+                }
+                console.log(form_data);
+
+                if(form_name == "scholarship_upload_form"){
+                    var data = new FormData();
+                    data.append('session_uid', window.__bot.session_uid);
+                    data.append('web_uid', window.__bot.web_uid);
+                    data.append('form_file', file);
+                    data.append('form_type', form_data['form_type']);
+                    var request_body = data;
+                    var request_headers = {};
+                }else{
+                    var data = {};
+                    data.web_uid = window.__bot.web_uid;
+                    data.session_uid = window.__bot.session_uid;
+                    data.form_data = form_data;
+                    var request_body = JSON.stringify(data);
+                    var request_headers = {
+                        "Content-Type": "application/json",
+                    };
+                }
+                window.__bot.disable_reset_chat();
+                window.__bot.awaiting_response = true;
+                fetch(window.__bot.server_host_http + window.__bot.url_prefix + "submit/" + form_name, {
+                        method: "POST",
+                        headers: request_headers,
+                        body: request_body,
+                    })
+                    .then(function (response) {
+                        console.log(response);
+                        return response.json()
+                    })
+                    .then(function (response_data) {
+                        console.log(response_data);
+                        if(response_data.error_msg){
+                            window.__bot.auth_form_email = null;
+                            window.__bot.auth_form_password = null;
+                            document.getElementById("error_message_" + form_name + "_server").innerHTML = response_data.error_msg;
+                            $(".chat_form_button").attr("disabled", false);
+                        }else{
+                            window.__bot.chat_form_hide(element_form_jquery);
+                            window.__bot.process_messages(response_data.response_messages, false, 0);
+                        }
+                        window.__bot.enable_reset_chat();
+                        window.__bot.awaiting_response = false;
+                    });
+            }
+
+            $("#mail_history_form_submit_button").click(function () {
+                console.log("submitting form");
+                //       console.log(params);
+                if (!document.getElementById("mail_history_form").checkValidity()) {
+                    var query_form = document.getElementById("mail_history_form");
+                    for (var i = 0; i < query_form.elements.length; i++) {
+                        var element = query_form.elements[i];
+                        console.log(element);
+                        if (element.required && !element.value.trim()) {
+                            document.getElementById("error_message_mail_history_" + element.name).innerHTML =
+                                "Please enter " + element.previousElementSibling.innerHTML.trim() + ".";
+                            element.classList.add("is-invalid");
+                        } else if (element.type == "email" && !element.checkValidity()) {
+                            document.getElementById("error_message_mail_history_" + element.name).innerHTML =
+                                "Please enter a valid email.";
+                            element.classList.add("is-invalid");
+                        } else {
+                            element.classList.remove("is-invalid");
+                        }
+                    }
+                } else if (document.getElementById("mail_history_form").checkValidity()) {
+                    $("#mail_history_form_submit_button").attr("disabled", true);
+                    var params = {};
+                    var data = {};
+                    $("#mail_history_form")
+                        .serializeArray()
+                        .map(function (x) {
+                            params[x.name] = x.value;
+                        });
+                    console.log(params);
+                    data.session_uid = window.__bot.session_uid;
+                    data.web_uid = window.__bot.web_uid;
+                    data.form_data = params;
+                    window.__bot.disable_reset_chat();
+                    window.__bot.awaiting_response = true;
+                    window.__bot.service_mail_history(data)
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (data) {
+                            console.log(data);
+                            $("#mailHistoryModal").modal("hide");
+                            $("#mail_history_form_submit_button").attr("disabled", false);
+                            window.__bot.enable_reset_chat();
+                            window.__bot.enable_text_input();
+                            window.__bot.awaiting_response = false;
+
+                            // response modal
+                            document.getElementById("response_modal_message").innerHTML = data.data ? data.data.message : data.error_msg;
+                            $("#responseModal").modal("show");
+                        });
+                }
+            });
+            $("#appointment_form_submit_button").click(function () {
+                console.log("submitting form");
+                // console.log(params);
+                var query_form = document.getElementById("appointment_form");
+                for (var i = 0; i < query_form.elements.length; i++) {
+                    var element = query_form.elements[i];
+                    element.classList.remove("is-invalid");
+                }
+                if (document.getElementById('appointment_form_day').value.trim() == "" || !document.getElementById("appointment_form").checkValidity()) {
+                    for (var i = 0; i < query_form.elements.length; i++) {
+                        var element = query_form.elements[i];
+                        console.log(element);
+                        if (element.required && !element.value.trim()) {
+                            element.classList.add("is-invalid");
+                        } else if (element.type == "email" && !element.checkValidity()) {
+                            element.classList.add("is-invalid");
+                        } else {
+                            element.classList.remove("is-invalid");
+                        }
+                    }
+                    if(document.getElementById('appointment_form_day').value.trim() == "") {
+                        document.getElementById('appointment_form_day').classList.add("is-invalid");
+                    }
+                } else {
+                    $("#appointment_form_submit_button").attr("disabled", true);
+                    var params = {};
+                    var data = {};
+                    $("#appointment_form")
+                        .serializeArray()
+                        .map(function (x) {
+                            params[x.name] = x.value;
+                        });
+                    data.session_uid = window.__bot.session_uid;
+                    data.web_uid = window.__bot.web_uid;
+                    params.start_time = params.day+"T"+params.time_slot.split("-")[0]+":00.0000000";
+                    params.end_time = params.day+"T"+params.time_slot.split("-")[1]+":00.0000000";
+                    console.log(params);
+                    data.form_data = params;
+                    console.log(data);
+                    window.__bot.disable_reset_chat();
+                    window.__bot.awaiting_response = true;
+                    window.__bot.service_appointment(data)
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (data) {
+                            console.log(data);
+                            $("#appointmentModal").modal("hide");
+                            $("#appointment_form_submit_button").attr("disabled", false);
+                            window.__bot.enable_reset_chat();
+                            window.__bot.enable_text_input();
+                            window.__bot.awaiting_response = false;
+
+                            // response modal
+                            document.getElementById("response_modal_message").innerHTML = data.data ? data.data.message : data.error_msg;
+                            $("#responseModal").modal("show");
+                        });
+                }
+            });
+
+            var wsIntervalId;
+
+            URL = window.URL || window.webkitURL;
+            var gumStream; //stream from getUserMedia()
+            var rec; //Recorder.js object
+            var input; //MediaStreamAudioSourceNode we'll be recording
+
+            var AudioContext = window.AudioContext || window.webkitAudioContext;
+            var audioContext; //audio context to help us record
+
+            // var recordButton = document.getElementById("recordButton");
+            // recordButton.addEventListener("click", startRecording);
+
+            window.__bot.startRecording = function () { 
+                if (!rec || !rec.recording) {
+                    $("#visualizer").show();
+                    console.log("recordButton clicked");
+                    var constraints = {
+                        audio: true,
+                        video: false,
+                    };
+                    window.__bot.stop_blob_data();
+                    navigator.mediaDevices
+                        .getUserMedia(constraints)
+                        .then(function (stream) {
+                            console.log(
+                                "getUserMedia() success, stream created, initializing Recorder.js ...");
+                            audioContext = new AudioContext();
+                            gumStream = stream;
+                            input = audioContext.createMediaStreamSource(stream);
+                            rec = new Recorder(input, {
+                                numChannels: 1,
+                                sampleRate: 16000,
+                            });
+                            console.log(rec);
+                            rec.record();
+                            recordButton.style.color = "red";
+                            recordButton.style.border = "1px solid red";
+                            recordButton.title.hide
+                            recordButton.title = "click to stop Recording"
+                            console.log("Recording started");
+                            wsIntervalId = setTimeout(function () {
+                                window.__bot.startRecording();
+                            }, 50000);
+                        })
+                        .catch(function (err) {
+                            //recordButton.disabled = false;
+                            //stopButton.disabled = true;
+                        });
+                } else {
+                    $("#visualizer").hide();
+                    recordButton.title.hide
+                    recordButton.title = "search by voice"
+                    console.log("stopButton clicked");
+                    window.__bot.show_voice_recognizing_indicator();
+                    window.__bot.scroll_to_bottom();
+                    recordButton.style.color = "var(--main-bg-color)";
+                    recordButton.style.border = "none";
+                    clearInterval(wsIntervalId);
+                    rec.stop();
+                    gumStream.getAudioTracks()[0].stop();
+                    rec.exportWAV(upload_to_server);
+                }
+            }
+
+            function upload_to_server(blob) {
+                var today = new Date();
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                console.log("time = ", time)
+                window.__bot.process_input(blob, undefined);
+            }
+            window.__bot.play_blob_data = function (data) {
+                document.getElementById('response_audio_source_id').setAttribute('src', "data:audio/mp3;base64," + data);
+                document.getElementById('response_audio_id').load();
+                document.getElementById("response_audio_id").play();
+            }
+            window.__bot.stop_blob_data = function () {
+                document.getElementById('response_audio_id').pause();
+            }
+            // init
+            window.__bot.pre_init();
+        });
+    </script>
+    <script>
+        window.onload = function () {
+            "use strict";
+            var paths = document.getElementsByTagName("path");
+            var visualizer = document.getElementById("visualizer");
+            var mask = visualizer.getElementById("mask");
+            var h = document.getElementById("visualizer_h1");
+            var path;
+            var report = 0;
+
+            var soundAllowed = function (stream) {
+                //Audio stops listening in FF without // window.persistAudioStream = stream;
+                //https://bugzilla.mozilla.org/show_bug.cgi?id=965483
+                //https://support.mozilla.org/en-US/questions/984179
+                window.persistAudioStream = stream;
+                h.innerHTML = "";
+                h.setAttribute("style", "opacity: 0;");
+                var audioContent = new AudioContext();
+                var audioStream = audioContent.createMediaStreamSource(stream);
+                var analyser = audioContent.createAnalyser();
+                audioStream.connect(analyser);
+                analyser.fftSize = 1024;
+
+                var frequencyArray = new Uint8Array(analyser.frequencyBinCount);
+                visualizer.setAttribute("viewBox", "0 0 255 255");
+
+                //Through the frequencyArray has a length longer than 255, there seems to be no
+                //significant data after this point. Not worth visualizing.
+                for (var i = 0; i < 255; i++) {
+                    path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                    path.setAttribute("stroke-dasharray", "4,1");
+                    mask.appendChild(path);
+                }
+                var doDraw = function () {
+                    requestAnimationFrame(doDraw);
+                    analyser.getByteFrequencyData(frequencyArray);
+                    var adjustedLength;
+                    for (var i = 0; i < 255; i++) {
+                        adjustedLength = Math.floor(frequencyArray[i]) - (Math.floor(frequencyArray[i]) % 5);
+                        paths[i].setAttribute("d", "M " + i + ",255 l 0,-" + adjustedLength);
+                    }
+                };
+                doDraw();
+            };
+
+            var soundNotAllowed = function (error) {
+                h.innerHTML = "";
+                console.log(error);
+            };
+
+            /*window.navigator = window.navigator || {};
+            /*navigator.getUserMedia =  navigator.getUserMedia       ||
+                                    navigator.webkitGetUserMedia ||
+                                    navigator.mozGetUserMedia    ||
+                                    null;*/
+            navigator.getUserMedia({ audio: true }, soundAllowed, soundNotAllowed);
+        };
+    </script>
+</body>
+
+</html>
