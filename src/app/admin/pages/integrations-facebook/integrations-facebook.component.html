@@ -1,0 +1,50 @@
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger" style="margin-inline-start: 0px;margin-inline-end: 0px;">
+                        <h4 class="card-title">Facebook Integrations</h4>
+                    </div>
+                    <!-- <a
+                    href="https://www.facebook.com/v6.0/dialog/oauth?client_id=535341180709564&redirect_uri=http://localhost:4200/chat/facebook/oauth/redirect_uri&state=abc&scope=manage_pages,pages_messaging">
+                    <img alt="Facebook" height="40" width="180" src="/static/images/fb_oauth_image.jpg">
+                </a> -->
+                    <!-- <div class="card-body">
+
+                    </div> -->
+                </div>
+
+                <button type="button" class="btn btn-save" (click)="submitLogin();" style="width: 200px;">Login with Facebook</button>
+
+                <mat-card style="margin-block-start: 2%;">
+                    <ul>
+                        <li *ngFor="let facebook_user_integration of facebook_user_integrations">
+                            Facebook User : {{ facebook_user_integration.facebook_user.name }}
+                            <br>
+                            <div class="card"
+                                *ngFor="let facebook_page of facebook_user_integration.facebook_user.facebook_pages">
+                                <div class="row">
+                                    <div class="col-sm-6 d-flex justify-content-center align-items-center">
+                                        {{ facebook_page.name }}
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <mat-form-field>
+                                            <mat-label>Select Bot</mat-label>
+                                            <mat-select (selectionChange)="doSomething(facebook_page, $event)"
+                                                [(ngModel)]="facebook_page.bot_id">
+                                                <mat-option value="">--Detach Bot--</mat-option>
+                                                <mat-option *ngFor="let bot of bots" [value]="bot.id">
+                                                    {{bot.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </mat-card>
+            </div>
+        </div>
+    </div>

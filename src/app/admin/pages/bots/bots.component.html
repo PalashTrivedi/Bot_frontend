@@ -1,0 +1,46 @@
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Bots</h4>
+                        <p class="card-category"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <main class="grid">
+            <article (click)="add()">
+                <div class="text">
+                    <a href="javascript:void(0);" class="btn-add"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                    <p> Add Bot</p>
+                </div>
+            </article>
+
+            <article *ngFor="let bot of bots">
+                <div class="text">
+                    <h3> {{ bot.name }}</h3>
+
+                    <p style="padding: 15px;"> {{ bot.agent ? bot.agent.name : '-' }}</p>
+                </div>
+                <hr class="m-0" />
+                <div class="text-center">
+                    <button mat-button (click)="edit(bot)" class=" btn-action">
+                        <i class="fa fa-edit" aria-hidden="true"></i>
+                    </button>
+                    <button mat-button [swal]="deleteSwal" id="delete_alert" class=" btn-action">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <swal #deleteSwal title="Delete {{bot.name}}?" text="This cannot be undone" [showCancelButton]="true"
+                    [focusCancel]="true" (confirm)="delete(bot)" class="btn-save"
+                    confirmButtonText="Delete">
+                </swal>
+            </article>
+        </main>
+    </div>
+</div>

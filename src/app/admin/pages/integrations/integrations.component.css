@@ -1,0 +1,27 @@
+.card-header{
+  height: 50px;
+}
+.card-button{
+  display: flex;
+  justify-content: center;
+}
+.main-content{
+  margin-top: 50px;
+  }
+
+/* .card-header-color {
+    background:  #3d6cb5;
+    }
+  
+  .card-title {
+    color: #fff;
+    font-weight: 400;
+  } */
+.card .card-header-info .card-icon {
+  background:#3d6cb5;
+
+ }
+
+ .card .card-header-info .card-icon, .card .card-header-info:not(.card-header-icon):not(.card-header-text), .card .card-header-info .card-text {
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(21, 30, 43, 0.4);
+}

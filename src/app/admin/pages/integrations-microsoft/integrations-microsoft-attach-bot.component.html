@@ -1,0 +1,109 @@
+<div class="modal-header p-0 border-0">
+    <b class="modal-title" id="exampleModalLongTitle" class="modal-title">Integrate Calender With Bot</b>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onNoClick()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<hr />
+<div mat-dialog-content>
+    <form (ngSubmit)="onSubmit()" #modelForm="ngForm">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Select Bot</mat-label>
+                        <mat-select [(ngModel)]="model.bot.id" name="bot" id="bot">
+                            <mat-option value="">--None--</mat-option>
+                            <mat-option *ngFor="let bot of data.bots" [value]="bot.id">
+                                {{ bot.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <mat-form-field>
+                        <input
+                            matInput
+                            [(ngModel)]="model.time_slot_duration"
+                            type="number"
+                            name="name"
+                            id="name"
+                            placeholder="Time Slot Duration(minutes)"
+                            class="form-control"
+                            autocomplete="off"
+                        />
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <mat-form-field>
+                    <mat-chip-list #chipList aria-label="User List">
+                        <mat-chip *ngFor="let user of model.users" [selectable]="true" [removable]="true" (removed)="remove(user)">
+                            {{ user.name }}
+                            <i class="fa fa-times-circle" matChipRemove *ngIf="true"></i>
+                        </mat-chip>
+                        <input
+                            placeholder="Users"
+                            [matChipInputFor]="chipList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            [matChipInputAddOnBlur]="true"
+                            (matChipInputTokenEnd)="add($event)"
+                        />
+                    </mat-chip-list>
+                </mat-form-field>
+            </div>
+        </div>
+        <br />
+        <p style="margin-top: -20px;margin-bottom: 40px;text-align: center;">
+            This Schedule is for Next Week with time zone  IST (UTC+5:30)
+        </p>
+        <div class="row row-day" *ngFor="let day of this.days">
+            <div class="col-3 d-flex align-items-center">
+                <div class="form-group">
+                    <p class="text-capitalize">{{ day }}</p>
+                </div>
+            </div>
+            <div class="col-3 d-flex align-items-center">
+                <div class="form-group">
+                    <mat-checkbox [(ngModel)]="model.availability[day].available" name="availability_{{ day }}_available">Available</mat-checkbox>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <mat-form-field>
+                        <input
+                            matInput
+                            [(ngModel)]="model.availability[day].start_time"
+                            type="time"
+                            name="availability_{{ day }}_start_time"
+                            placeholder="Start Time"
+                        />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <mat-form-field>
+                        <input
+                            matInput
+                            [(ngModel)]="model.availability[day].end_time"
+                            type="time"
+                            name="availability_{{ day }}_end_time"
+                            placeholder="End Time"
+                        />
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button class="btn btn-save" mat-button (click)="create()">Save</button>
+    <button class="btn btn-grey" mat-button (click)="onNoClick()">Cancel</button>
+</div>

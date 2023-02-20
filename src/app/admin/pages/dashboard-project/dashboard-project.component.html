@@ -1,0 +1,282 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon p-0">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <p class="card-category">Bots</p>
+                        <h3 class="card-title">{{ data.counts.bots }}
+                            <div class="mat_progress_loaders" *ngIf='hide_spinner'>
+                                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                            </div>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon p-0">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <p class="card-category">Users</p>
+                        <h3 class="card-title">{{ data.counts.bot_sessions }}
+                            <div class="mat_progress_loaders" *ngIf='hide_spinner'>
+                                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                            </div>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon p-0" style="background: #3d6cb5 !important;">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <p class="card-category">Conversations</p>
+                        <h3 class="card-title">{{ data.counts.conversations }}
+                            <div class="mat_progress_loaders" *ngIf='hide_spinner'>
+                                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                            </div>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon p-0">
+                            <i class="far fa-envelope-open"></i>
+                        </div>
+                        <p class="card-category">Total Messages</p>
+                        <h3 class="card-title">{{ data.counts.messages }}
+                            <div class="mat_progress_loaders" *ngIf='hide_spinner'>
+                                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                            </div>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Date Filter</h4>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-sm-1">
+                                </div>
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Start Date</mat-label>
+                                        <input matInput [matDatepicker]="start_date" [max]="max_date"
+                                            [value]="start_date_inital.value"
+                                            (dateChange)="event_start_date_changed($event)" disabled>
+                                        <mat-datepicker-toggle matSuffix [for]="start_date"></mat-datepicker-toggle>
+                                        <mat-datepicker #start_date disabled="false"></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>End Date</mat-label>
+                                        <input matInput [matDatepicker]="end_date" [max]="max_date"
+                                            [value]="end_date_inital.value"
+                                            (dateChange)="event_end_date_changed($event)" disabled>
+                                        <mat-datepicker-toggle matSuffix [for]="end_date"></mat-datepicker-toggle>
+                                        <mat-datepicker #end_date disabled="false"></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button mat-flat-button color="primary" id="filter_btn" type="button"
+                                        style="background: #3d6cb5;margin-top: 10px;" (click)="event_submit()"
+                                        [disabled]="api_inprogress">Filter</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-chart">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Users</h4>
+                    </div>
+                    <div class="card-header card-header sha mt-3 m-3">
+                        <div class="ct-chart" id="divChart">
+                            <div class="d-flex justify-content-center" *ngIf='hide_spinner' style="margin-top:75px;">
+                                <mat-spinner diameter="50" str></mat-spinner>
+                            </div>
+                            <canvas id="userChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card card-chart">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Query Form Submission Rate</h4>
+                    </div>
+                    <div class="card-header card-header sha mt-3 m-3">
+                        <div class="ct-chart" id="divChart">
+                            <div class="d-flex justify-content-center" *ngIf='hide_spinner' style="margin-top:75px;">
+                                <mat-spinner diameter="50" str></mat-spinner>
+                            </div>
+                            <canvas id="formConvRatioChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-chart">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Total Messages</h4>
+                    </div>
+                    <div class="card-header card-header sha mt-3 m-3">
+                        <div class="ct-chart" id="divChart">
+                            <div class="d-flex justify-content-center" *ngIf='hide_spinner' style="margin-top:75px;">
+                                <mat-spinner diameter="50" str></mat-spinner>
+                            </div>
+                            <canvas id="messagesChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card card-chart">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Conversation Completion Rate</h4>
+                    </div>
+                    <div class="card-header card-header sha mt-3 m-3">
+                        <div class="ct-chart" id="divChart">
+                            <div class="d-flex justify-content-center" *ngIf='hide_spinner' style="margin-top:75px;">
+                                <mat-spinner diameter="50" str></mat-spinner>
+                            </div>
+                            <canvas id="conversationsPercentageChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-chart">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Peak Hours</h4>
+                    </div>
+                    <div class="card-header card-header sha mt-3 m-3">
+                        <div class="ct-chart" id="divChart">
+                            <div class="d-flex justify-content-center" *ngIf='hide_spinner' style="margin-top:75px;">
+                                <mat-spinner diameter="50" str></mat-spinner>
+                            </div>
+                            <canvas id="peakHoursChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card card-chart">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Bounced Users</h4>
+                    </div>
+                    <div class="card-header card-header sha mt-3 m-3">
+                        <div class="ct-chart" id="divChart">
+                            <div class="d-flex justify-content-center" *ngIf='hide_spinner' style="margin-top:75px;">
+                                <mat-spinner diameter="50" str></mat-spinner>
+                            </div>
+                            <canvas id="userBouncedChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-md-12">
+                <div class="card card-chart">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Top Queries</h4>
+                    </div>
+                    <div class="card-header card-header sha mt-3 m-3">
+                        <div class="ct-chart" id="divChart">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <angular-tag-cloud [width]="900" [data]="words_data" [overflow]="true"></angular-tag-cloud>
+                                </div>
+                                <div class="col-md-3"></div>
+                                <div class="col-md-3">
+                                    <span *ngFor="let word of (data.top_queries_words ? data.top_queries_words.slice(0,10) : []);let indexOfelement=index;">
+                                        {{ (indexOfelement+1) + '. ' + word[0] }}<br>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-chart">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Top Queries</h4>
+                    </div>
+                    <!-- <div>
+                            <span *ngFor = "let replies of reply" id="quick_replies" class="quick_replies_class" [style.background]="replies.y">
+                                {{replies.x}}
+                                <br/>
+                                </span>    
+                        </div> -->
+                    <div>
+                        <div class="d-flex justify-content-center" *ngIf='hide_spinner' style="margin-top:75px;">
+                            <mat-spinner diameter="50" str></mat-spinner>
+                        </div>
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf='show_spinner'>
+
+                            <!--- Note that these columns can be defined in any order.
+                                      The actual rendered columns are set as a property on the row definition" -->
+
+                            <!-- Position Column -->
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef> KeyWords </th>
+                                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="count">
+                                <th mat-header-cell *matHeaderCellDef> Occurences </th>
+                                <td mat-cell *matCellDef="let element"> {{element.count}} </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

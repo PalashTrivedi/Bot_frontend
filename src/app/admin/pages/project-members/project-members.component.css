@@ -1,0 +1,20 @@
+.td-project-member-role {
+    width: 217px;
+}
+.mat-form-field {
+    height: 54px;
+}
+.modal-title {
+    color: #3d6cb5;
+    font-size: 22px;
+    margin-left: 160px;
+    font-weight: 600;
+}
+.btn-save {
+    background: #3d6cb5;
+    color: #fff;
+    }
+
+.btn-save:hover {
+        background: #5380c5;
+    }

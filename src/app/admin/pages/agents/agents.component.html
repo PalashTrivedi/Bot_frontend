@@ -1,0 +1,42 @@
+<div class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title ">Agents</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <main class="grid">
+      <article (click)="add()">
+        <div class="text">
+          <a href="javascript:void(0);" class="btn-add"><i class="fa fa-plus" aria-hidden="true"></i></a>
+          <p> Add Agent</p>
+        </div>
+      </article>
+
+      <article *ngFor="let item of agents">
+        <div class="text">
+          <h3> {{ item.name }}</h3>
+          <p style="padding: 15px;"> {{ item.ai_provider.name }}</p>
+        </div>
+        <hr class="m-0" />
+        <div class="text-center">
+          <button mat-button (click)="edit(item)" class=" btn-action">
+            <i class="fa fa-edit" aria-hidden="true"></i>
+          </button>
+          <button mat-button [swal]="deleteSwal" id="delete_alert" class=" btn-action">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+        </div>
+        <swal #deleteSwal title="Delete {{item.name}}?" text="This cannot be undone" [showCancelButton]="true"
+          [focusCancel]="true" (confirm)="delete(item)" class="btn-save" confirmButtonText="Delete">
+        </swal>
+      </article>
+    </main>
+  </div>
+</div>

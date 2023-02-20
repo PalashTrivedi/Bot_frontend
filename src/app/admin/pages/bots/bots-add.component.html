@@ -1,0 +1,36 @@
+<div class="modal-header p-0 border-0">
+    <b class="modal-title" id="exampleModalLongTitle" class="modal-title">Add Bots</b>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onNoClick()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<hr />
+<div mat-dialog-content>
+    <form (ngSubmit)="onSubmit()" #modelForm="ngForm">
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput [(ngModel)]="model.name" #name="ngModel" name="name" id="name" placeholder="Name" class="form-control" autocomplete="off">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <textarea matInput [(ngModel)]="model.description" name="description" id="description" placeholder="Description(optional)" class="form-control"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <mat-label>Select Agent</mat-label>
+                <mat-select [(ngModel)]="model.agent" name="agent" id="agent">
+                    <mat-option value="">--None--</mat-option>
+                    <mat-option *ngFor="let agent of data.agents" [value]="agent.id">
+                        {{agent.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button class="btn btn-save" mat-button (click)="create()">Save</button>
+    <button class="btn btn-grey" mat-button (click)="onNoClick()">Cancel</button>
+</div>

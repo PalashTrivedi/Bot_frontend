@@ -1,0 +1,136 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .box {
+    background-color: #fff;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding: 30px;
+    max-width: 1000px;
+    margin: 17px;
+  }
+  
+  body {
+    background-color: #947EB0;
+    justify-content: center;
+    display: flex;
+  }
+  
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    grid-gap: 20px;
+  }
+  
+  .grid > article {
+    /* border: 1px solid #ccc; */
+    box-shadow: 2px 2px 6px 0px rgba(199, 199, 199);
+    background-color: #fff;
+    padding: 3% 0;
+    width: 180px;
+    border-radius: 3px;
+    height: 140px;
+    width: 177px;
+  }
+  
+  
+  .grid .text {
+    /* padding: 10px 20px 20px 30px; */
+    color: #808285;
+    margin-bottom: 20px;  
+    text-align: center;
+    margin: 0px;
+    height: 90px;
+  }
+  
+  .grid .btn {
+    margin-top: 20px;
+    background-color: #eeeeee;
+      border: 0;
+      border-radius: 5px;
+      color: #000;
+      font-size: 15px;
+      padding: 5px 10px 5px 10px;
+    /* line-height: 5; */
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+    visibility: hidden;
+    
+  }
+
+  .grid .btn-add {
+    margin-top: 20px;
+    /* background-color: #e0d4e9; */
+      border: 0;
+      /* border-radius: 5px; */
+      color: #000;
+      font-size: 30px;
+      padding: 1px 10px 2px 10px;
+    line-height: 3;
+    text-decoration: none;
+    border: 1px solid #867676;
+    border-radius: 25px;    
+  }
+  
+  .btn:hover {
+    background: #d1d3d4;
+    transition-duration: 80ms;
+  }
+  
+  h3{ 
+    color: #000;
+    text-align: center;
+    margin: 0px;
+    font-size: 16px;
+    padding-top: 18px;
+  }
+
+  .btn-action {
+    font-size: 20px;
+}
+
+
+  .main-content{
+    margin-top: 50px;
+    }
+
+.card-header {
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+    
+ 
+  #delete_alert{
+      background: transparent;
+      border:none;
+    }
+
+    /* .card-header-color {
+      background:  #3d6cb5;
+      }
+    
+  .card-title {
+      color: #fff;
+      font-weight: 400;
+    } */
+
+  .btn-save {
+      background: #3d6cb5;
+    }
+  .btn-save:hover {
+      background: #5380c5;
+  }
+
+  .modal-title {
+    color: #3d6cb5;
+    font-size: 22px;
+    margin-left: 155px;
+    font-weight: 600;
+
+  }
+
+  
+  
+ 

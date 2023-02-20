@@ -1,0 +1,141 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Project Members</h4>
+                        <p class="card-category"></p>
+                    </div>
+                    <div class="card-body">
+                        <button mat-button (click)="add()" class="btn-save float-right " title="Add">
+                            Add
+                        </button>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-primary">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Role
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                    <th>
+                                        <!-- <button mat-button (click)="add()" class="btn-save" title="Add">
+                                            Add
+                                        </button> -->
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let project_member of project_members; index as i">
+                                        <td>
+                                            {{ i + 1 }}
+                                        </td>
+                                        <td>
+                                            {{ project_member.user.email }}
+                                        </td>
+                                        <td>
+                                            {{ project_member.user.first_name + " " + project_member.user.last_name }}
+                                        </td>
+                                        <td
+                                            *ngIf="current_edit_project_member && current_edit_project_member.id == project_member.id"
+                                            class="td-project-member-role"
+                                        >
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Select Role</mat-label>
+                                                <mat-select
+                                                    [(ngModel)]="current_edit_role"
+                                                    (selectionChange)="edit_save($event)"
+                                                    #role="ngModel"
+                                                    name="role"
+                                                    id="role"
+                                                    placeholder="Select Role"
+                                                    required
+                                                >
+                                                    <mat-option *ngFor="let role of roles_choices" [value]="role.id" class="form-control">
+                                                        {{ role.display_name }}
+                                                    </mat-option>
+                                                </mat-select>
+                                                
+                                            </mat-form-field>
+                                        </div>
+                                            
+                                            <button
+                                                *ngIf="project_member.role.slug != 'project_owner' && current_edit_project_member"
+                                                mat-button
+                                                (click)="edit_cancel()"
+                                                class="btn-action"
+                                                title="Cancel"
+                                            >
+                                                <i class="material-icons" style="font-size: 25px;">
+                                                    close
+                                                </i>
+                                            </button>
+                                            
+                                        </div>
+                                            
+                                        </td>
+                                        <td
+                                            *ngIf="!current_edit_project_member || current_edit_project_member.id != project_member.id"
+                                            class="td-project-member-role"
+                                        >
+                                            {{ project_member.role.display_name }}
+                                            <button
+                                                *ngIf="project_member.role.slug != 'project_owner' && !current_edit_project_member"
+                                                mat-button
+                                                (click)="edit(project_member)"
+                                                class="btn-action"
+                                                title="Edit"
+                                            >
+                                                <i class="material-icons" style="font-size: 25px;">
+                                                    edit
+                                                </i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            
+                                            
+                                            <button
+                                                *ngIf="project_member.role.slug != 'project_owner'"
+                                                mat-button
+                                                [swal]="deleteSwal"
+                                                id="delete_alert"
+                                                class="btn-action m-0"
+                                                title="Remove"
+                                            >
+                                                <i class="material-icons" style="font-size: 25px;">delete</i>
+                                            </button>
+                                            <swal
+                                                #deleteSwal
+                                                title="Remove access {{ project_member.user.email }}?"
+                                                text="This cannot be undone"
+                                                [showCancelButton]="true"
+                                                [focusCancel]="true"
+                                                (confirm)="delete(project_member)"
+                                                class="btn-save"
+                                                confirmButtonText="Delete"
+                                            >
+                                            </swal>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

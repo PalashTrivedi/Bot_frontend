@@ -1,0 +1,38 @@
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger" style="margin-inline-start: 0px; margin-inline-end: 0px">
+                        <h4 class="card-title">Microsoft Integration</h4>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-save" (click)="initiate_oauth()" style="width: 200px">Login with Microsoft</button>
+                <mat-card style="margin-block-start: 2%">
+                    <ul>
+                        <li *ngFor="let integration of integrations">
+                            User : {{ integration.microsoft_user.display_name }} : {{ integration.microsoft_user.user_principal_name }}
+                            <br />
+                            <button class="btn" (click)="attach_bot(integration)">Integrate Calender</button>
+                            <div class="card" *ngFor="let microsoft_calender_integration of integration.microsoft_calender_integrations">
+                                <div class="row">
+                                    <div class="col-sm-6 d-flex justify-content-center align-items-center">
+                                        {{ microsoft_calender_integration.bot.name }}
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button mat-button class="btn-action" (click)="edit_microsoft_calender_integration(microsoft_calender_integration)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                        <button mat-button class="btn-action" (click)="delete_microsoft_calender_integration(microsoft_calender_integration)">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

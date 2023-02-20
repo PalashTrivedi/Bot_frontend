@@ -1,0 +1,64 @@
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Web Integration</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <main class="grid">
+            <article (click)="add()">
+                <div class="text">
+                    <a href="javascript:void(0);" class="btn-add"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                    <p> Add Web Integration</p>
+                </div>
+            </article>
+
+            <article *ngFor="let integration of integrations">
+                <div class="text">
+                    <h3> {{ integration.web_bot.display_name }}</h3>
+
+                    <p style="padding: 15px;"> {{ integration.web_bot.bot_type.slug || '-' }}</p>
+                </div>
+                <hr class="m-0" />
+                <div class="row">
+                    <div class="col-md-3 p-0">
+                        <button mat-button (click)="edit(integration)" class=" btn-action">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-3 p-0">
+
+                        <button mat-button (click)="code(integration)" *ngIf="integration.web_bot.bot.id"
+                            title="Code Snippet" class=" btn-action">
+                            <i class="fa fa-code" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-3 p-0">
+                        <button mat-button *ngIf="integration.web_bot.bot.id" title="Test Chat" class=" btn-action">
+                            <a href="{{ config.webbot_url }}/index.html?web_uid={{ integration.web_bot.web_uid }}&host_backend={{config.chat_server_url}}"
+                                target="_blank">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                            </a>
+                        </button>
+                    </div>
+
+                    <div class="col-md-3 p-0">
+                        <button mat-button [swal]="deleteSwal" id="delete_alert" class=" btn-action m-0">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                        <swal #deleteSwal title="Delete {{integration.web_bot.display_name}}?"
+                            text="This cannot be undone" [showCancelButton]="true" [focusCancel]="true"
+                            (confirm)="delete(integration)" class="btn-save" confirmButtonText="Delete">
+                        </swal>
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
+</div>

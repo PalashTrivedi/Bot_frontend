@@ -1,0 +1,41 @@
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger" style="margin-inline-start: 0px;margin-inline-end: 0px;">
+                        <h4 class="card-title">Integrations</h4>
+                    </div>
+                    <!-- <div class="card-body">
+                    </div> -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let platform of platforms">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-info card-header-icon">
+                                <div class="card-icon">
+                                    <i class="{{ platform.icon }}"></i>
+                                    <!-- 
+                                    fas fa-tablet-alt
+                                    fab fa-facebook-f
+                                    fab fa-slack-hash 
+                                    -->
+                                </div>
+                                <h4 class="card-title" style="text-align: center;font-weight:bold;">{{ platform.name }}</h4>
+                                <p class="card-category" style="text-align: center;color:black">
+                                    {{ platform.description }}
+                                </p>
+                            </div>
+                            <br>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <button mat-button routerLink="{{ platform.slug }}" style="color:#3d6cb5;"> Integrate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

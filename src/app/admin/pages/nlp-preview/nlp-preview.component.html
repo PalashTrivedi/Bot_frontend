@@ -1,0 +1,14 @@
+<div class="main-content">
+    <div class="container">
+        <div>
+            GET:<input id="input_url" class="form-control" type="text" [(ngModel)]="input_url" placeholder="Enter server url">
+            <br/>
+            <input id="input_key" class="form-control" type="text" [(ngModel)]="input_key" placeholder="Enter your query key">
+            <br/>
+            <textarea id="input_inp" class="form-control" type="text"[(ngModel)]="input_val" placeholder="Enter your input string"></textarea>
+            <br/>
+            <button (click)="nlpout();" class="btn btn-save">Click to add input</button>
+        </div>
+        <div><pre>{{response_out}}</pre></div>
+    </div>
+</div>

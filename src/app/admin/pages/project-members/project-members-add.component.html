@@ -1,0 +1,41 @@
+<div class="modal-header p-0 border-0">
+    <b class="modal-title" id="exampleModalLongTitle">Add Member</b>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onNoClick()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<hr />
+<div mat-dialog-content>
+    <form (ngSubmit)="onSubmit()" #modelForm="ngForm">
+        <div class="form-group">
+            <mat-form-field>
+                <input
+                    matInput
+                    [(ngModel)]="model.email"
+                    #email="ngModel"
+                    name="email"
+                    type="email"
+                    id="email"
+                    placeholder="Email"
+                    class="form-control"
+                    autocomplete="off"
+                />
+            </mat-form-field>
+        </div>
+        <br>
+        <div class="form-group">
+            <mat-form-field>
+                <mat-label>Select Role</mat-label>
+                <mat-select [(ngModel)]="model.role" name="role" id="role">
+                    <mat-option *ngFor="let role of data.roles_choices" [value]="role.id">
+                        {{ role.display_name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button class="btn btn-save" mat-button (click)="create()">Save</button>
+    <button class="btn btn-grey" mat-button (click)="onNoClick()">Cancel</button>
+</div>

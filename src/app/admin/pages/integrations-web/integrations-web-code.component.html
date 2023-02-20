@@ -1,0 +1,23 @@
+<div mat-dialog-content>
+    <textarea disabled="true" rows="13" cols="73" id="code_snippet"><!-- chatbot snippet start -->
+<script type="text/javascript">
+    window.__bot = {};
+    window.__bot.web_uid = '{{ data.web_uid }}';
+    window.__bot.host_backend = '{{ host_backend }}';
+    window.__bot.host_webbot = '{{ host_webbot }}';
+    (function () {
+        var be = document.createElement('script'); be.type = 'text/javascript'; be.async = true;
+        be.src = window.__bot.host_webbot + '/assets/js/web_widget.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(be, s);
+    })();
+</script>
+<!-- chatbot snippet end -->
+</textarea>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-center">
+    <button class="btn btn-save" mat-button (click)="copy_snippet()">
+        <i class="fa fa-code" aria-hidden="true"></i>
+        &nbsp;Copy Snippet&nbsp;
+        <i class="fa fa-code" aria-hidden="true"></i>
+    </button>
+</div>
