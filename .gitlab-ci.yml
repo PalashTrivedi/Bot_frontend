@@ -1,0 +1,37 @@
+# specifies docker image to use
+image: node:latest
+
+stages:
+  - deploy
+
+# dev deployment
+deploy_dev:
+  stage: deploy
+  environment:
+    name: dev
+    url: https://bot-web-app.herokuapp.com/
+  only:
+    - feature-dev
+    - develop
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    # - npm run build:dev
+    - dpl --provider=heroku --app=$HEROKU_DEV_APP --api-key=$HEROKU_API_KEY
+
+# staging deployment
+deploy_staging:
+  stage: deploy
+  environment:
+    name: staging
+    url: https://bot-web-stage-app.herokuapp.com/
+  # deploy only when `staging` branch is changed
+  only:
+    - staging
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    # - npm run build:dev
+    - dpl --provider=heroku --app=$HEROKU_STAGING_APP --api-key=$HEROKU_API_KEY
